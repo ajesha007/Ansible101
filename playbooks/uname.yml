@@ -1,0 +1,9 @@
+#uname playbook
+---
+  - hosts: webservers:bastions
+    tasks:
+      - name: get the os of each host
+        shell: uname
+        changed_when: False
+
+        
