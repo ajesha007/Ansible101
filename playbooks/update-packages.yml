@@ -1,0 +1,7 @@
+#setup web servers- update packages
+---
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: update all packages to the latest versions
+        yum: name=* state=latest
