@@ -1,0 +1,25 @@
+---
+# tasks file for roles/webservers
+
+- name: update all packages to the latest versions
+  apt: name=* state=latest
+
+- name: install apache webserver
+  apt: name=apache2 state=present
+
+- name: delete original index.html file
+  file: "path={{ index_path }} state=absent"
+
+- name: Create a directory for github to use
+  file: 
+    path: /var/www/github
+    state: directory
+
+- name: download git hub repository
+  git:
+    repo: 'https://github.com/ajesha007/Ansible101.git'
+    dest: /var/www/github
+
+- name: copy index.html to the /var/www/html folder
+  command: mv /var/www/github/index.html /var/www/html
+  notify: start apache
