@@ -28,6 +28,6 @@
 - name: replace 'HOSTNAME' with that devices IP address
   replace:
     path: "{{ index_path }}"
-    regexp: 'HOSTNAME'
+    regexp: 'HOSTADDRESS'
     replace: '{{ ansible_all_ipv4_addresses[0] }}'
   notify: start apache
