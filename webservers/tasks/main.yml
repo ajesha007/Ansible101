@@ -19,7 +19,15 @@
   git:
     repo: 'https://github.com/ajesha007/Ansible101.git'
     dest: /var/www/github
+    accept_hostkey: yes
+    force: yes
 
 - name: copy index.html to the /var/www/html folder
   command: mv /var/www/github/index.html /var/www/html
+
+- name: replace 'HOSTNAME' with that devices IP address
+  replace:
+    path: "{{ index_path }}"
+    regexp: 'HOSTNAME'
+    replace: '{{ ansible_all_ipv4_addresses[0] }}'
   notify: start apache
